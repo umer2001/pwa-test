@@ -10,6 +10,8 @@ function App() {
       if (rawData.ok) {
         const data = await rawData.json();
         setJoke(data.value);
+      } else {
+        console.log("data wasn't fetched");
       }
     }
     fetchData();
