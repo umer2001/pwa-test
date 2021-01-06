@@ -4,12 +4,15 @@ import "./App.css";
 
 function App() {
   const [joke, setJoke] = useState("");
-  useEffect(async () => {
-    var rawData = await fetch("https://api.chucknorris.io/jokes/random");
-    if (rawData.ok) {
-      const data = await rawData.json();
-      setJoke(data.value);
+  useEffect(() => {
+    async function fetchData() {
+      var rawData = await fetch("https://api.chucknorris.io/jokes/random");
+      if (rawData.ok) {
+        const data = await rawData.json();
+        setJoke(data.value);
+      }
     }
+    fetchData();
   }, []);
 
   return (
