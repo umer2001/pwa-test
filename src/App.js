@@ -1,8 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [joke, setJoke] = useState("");
+  useEffect(async () => {
+    var rawData = await fetch("https://api.chucknorris.io/jokes/random");
+    if (rawData.ok) {
+      const data = await rawData.json();
+      setJoke(data.value);
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +19,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>{joke}</p>
       </header>
     </div>
   );
